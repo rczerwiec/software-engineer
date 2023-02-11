@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import {Provider} from "react-redux"
 import Photos from './views/Photos';
 import Users from './views/Users';
 import Posts from './views/Posts';
+import { store } from './shared/store';
 
 import {
   createBrowserRouter,
@@ -35,6 +37,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+       <RouterProvider router={router}/>
+    </Provider>
   </React.StrictMode>
 );
