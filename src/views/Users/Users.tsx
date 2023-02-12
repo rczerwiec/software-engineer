@@ -3,13 +3,11 @@ import { useFetchUsersQuery } from "../../shared/store";
 import { IUser } from "../../shared/globalTypes";
 import UserCard from "./UserCard";
 import { useState } from "react";
-import { useModal, Modal } from "../../shared/components/Modal";
 import UserCreate from "./UserCreate";
 
 function Users() {
   const response = useFetchUsersQuery("");
   const [selectedUser, setSelectedUser] = useState<IUser>();
-  const { isVisible, closeModal, toggleModal } = useModal();
 
   const onUserDelete = (user: IUser) => {
     setSelectedUser(user);
