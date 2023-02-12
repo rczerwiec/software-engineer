@@ -23,7 +23,7 @@ function Photos(){
     else if(response.isSuccess){
         renderedAlbums = response.data.map((album: IAlbum) => {
             return (
-                    <AlbumPhotos id={album.id} title={album.title} />
+                    <AlbumPhotos key={album.id} id={album.id} title={album.title} />
             )
         })
     }

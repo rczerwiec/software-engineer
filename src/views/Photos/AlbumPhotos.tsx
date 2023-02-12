@@ -29,7 +29,6 @@ function AlbumPhotos({ id, title }: IAlbum) {
 
   return (
     <div
-      key={id}
       className="flex justify-between border-b p-4 items-center cursor-pointer"
     >
         
@@ -52,11 +51,11 @@ function AlbumPhotos({ id, title }: IAlbum) {
 
       <Modal isVisible={isVisible} onClose={closeModal}>
         <div className="absolute bg-whiteMain mt-20 h-3/4 w-full top-0 bg-white rounded ">
-          <div className="absolute flex flex-col justify-between p-8 shrink h-full w-full  scrollbar-hide">
+          <div className="absolute flex flex-col justify-between p-8 shrink h-full w-full overflow-y-auto  scrollbar-hide">
             <h3 className="text-center text-md font-bold my-2">
               Album:{title}
             </h3>
-            <div className="flex flex-col justify-center items-center overflow-y-auto">
+            <div className="flex flex-col justify-center items-center ">
             {renderedPhotos}
             </div>
 

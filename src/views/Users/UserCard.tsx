@@ -6,10 +6,9 @@ import UserEdit from "./UserEdit";
 interface IProps {
   user: IUser;
   key: number;
-  onUserEdit: (user: IUser) => void;
 }
 
-function UserCard({ user, onUserEdit }: IProps) {
+function UserCard({ user }: IProps) {
   return (
     <div className="flex justify-between border-b p-4 items-center">
       <div className="flex gap-2">
@@ -21,7 +20,7 @@ function UserCard({ user, onUserEdit }: IProps) {
       </div>
       <div className="flex gap-2">
         <UserDelete user={user} />
-        <UserEdit onEdit={onUserEdit} user={user} />
+        <UserEdit user={user} />
       </div>
     </div>
   );

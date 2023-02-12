@@ -21,12 +21,32 @@ const mainApi = createApi({
             };
           },
         }),
+        createUser: builder.mutation({
+          invalidatesTags: ["Users"],
+          query: (user) => {
+            return {
+              url: `/users/`,
+              method: "POST",
+              body: user,
+            };
+          },
+        }),
         deleteUser: builder.mutation({
           invalidatesTags: ["Users"],
           query: (user) => {
             return {
               url: `/users/${user.id}`,
               method: "DELETE",
+            };
+          },
+        }),
+        editUser: builder.mutation({
+          invalidatesTags: ["Users"],
+          query: (user) => {
+            return {
+              url: `/users/${user.id}`,
+              method: "PUT",
+              body: user,
             };
           },
         }),
@@ -61,5 +81,5 @@ const mainApi = createApi({
     },
   });
 
-  export const {useFetchUsersQuery, useFetchAlbumsQuery, useFetchPostsQuery,useFetchAlbumPhotosQuery ,useDeleteUserMutation} = mainApi;
+  export const {useFetchUsersQuery, useCreateUserMutation, useEditUserMutation, useFetchAlbumsQuery, useFetchPostsQuery,useFetchAlbumPhotosQuery ,useDeleteUserMutation} = mainApi;
   export {mainApi};

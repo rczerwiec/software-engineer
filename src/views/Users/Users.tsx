@@ -11,19 +11,6 @@ function Users() {
   const [searchBarValue, setSearchBarValue] = useState("");
   const response = useFetchUsersQuery("");
 
-
-
-  const onUserEdit = (user: IUser) => {
-    
-    console.log(user.name, "onUserEdit");
-  };
-
-  const onUserCreate = () => {
-    console.log("Create a user...");
-
-    //
-  };
-
   let renderedUsers;
 
   if (response.isLoading) {
@@ -36,7 +23,6 @@ function Users() {
         <UserCard
           user={user}
           key={user.id}
-          onUserEdit={onUserEdit}
         />
       );
     });
@@ -51,7 +37,7 @@ function Users() {
           }}
         />
 
-        <UserCreate onCreate={onUserCreate} />
+        <UserCreate/>
         <div className="h-3/4 overflow-scroll border border-primary-gray rounded-lg">
           {renderedUsers}
         </div>

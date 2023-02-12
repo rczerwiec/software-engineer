@@ -3,10 +3,11 @@ import { useFormik } from "formik";
 import { IUser } from "../../shared/globalTypes";
 import TextInput from "../../shared/components/TextInput";
 import { formSchema } from "./userFormSchema";
-import {MdEdit} from "react-icons/md"
+import { MdEdit } from "react-icons/md";
+import displayToast from "../../shared/utils/displayToast";
+import { useEditUserMutation } from "../../shared/store";
 
 interface IProps {
-  onEdit: (user: IUser) => void;
   user: IUser;
 }
 //TODO:
@@ -14,29 +15,52 @@ interface IProps {
 // 2. Export form to another component
 //https://formik.org/docs/guides/validation
 
-function UserEdit({ onEdit, user }: IProps) {
+function UserEdit({ user }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
+  const [editUser, result] = useEditUserMutation();
+
   const formik = useFormik({
     initialValues: {
+      id: user.id,
       username: user.username,
       name: user.name,
       email: user.email,
       phone: user.phone,
       website: user.website,
-      city: user.address.city,
-      street: user.address.street,
-      zipcode: user.address.zipcode,
-      suite: user.address.suite,
-      bs: user.company.bs,
-      companyName: user.company.name,
+      address: {
+        city: user.address.city,
+        geo: {
+          lat: user.address.geo.lat,
+          lng: user.address.geo.lng,
+        },
+        street: user.address.street,
+        suite: user.address.suite,
+        zipcode: user.address.zipcode,
+      },
+      company: {
+        bs: user.company.bs,
+        catchPhrase: user.company.catchPhrase,
+        name: user.company.name,
+      },
     },
     //validationSchema: formSchema,
     onSubmit: (values) => {
-      onEdit(user);
-      alert(JSON.stringify(values, null, 2));
+      onUserEdit(values);
       closeModal();
     },
   });
+
+  const onUserEdit = async (user: IUser) => {
+    return await editUser(user)
+      .unwrap()
+      .then((res) => {
+        displayToast({ type: "success", message: "Successfully edited user" });
+      })
+      .catch((err) => {
+        displayToast({ type: "error", message: "Unexpected error" });
+      });
+  };
+
   //console.log(formik);
   return (
     <div>
@@ -45,12 +69,18 @@ function UserEdit({ onEdit, user }: IProps) {
           toggleModal();
         }}
       >
-        <MdEdit  className="w-6 h-6 text-gray-400"/>
+        <MdEdit className="w-6 h-6 text-gray-400" />
       </div>
       <Modal isVisible={isVisible} onClose={closeModal}>
-        <div className="absolute bg-whiteMain mt-20 h-full w-1/2 left-1/4 top-0 bg-white rounded ">
-          <div className="absolute flex flex-col shrink h-full w-full overflow-y-auto scrollbar-hide">
-            <form onSubmit={formik.handleSubmit}>
+        <div className="absolute bg-whiteMain mt-20 h-3/4 w-full top-0 bg-white rounded">
+          <div className="absolute flex flex-col shrink h-full w-full overflow-y-auto scrollbar-hide p-6">
+            <h3 className="text-center text-md font-bold my-2">
+              <span>Edit User</span>
+            </h3>
+            <form
+              onSubmit={formik.handleSubmit}
+              className="flex flex-col gap-2"
+            >
               <TextInput
                 name="username"
                 type="text"
@@ -87,48 +117,43 @@ function UserEdit({ onEdit, user }: IProps) {
                 onChange={formik.handleChange}
               />
               <TextInput
-                name="city"
+                name="address.city"
                 type="text"
-                value={formik.values.city}
+                value={formik.values.address.city}
                 label="City"
                 onChange={formik.handleChange}
               />
               <TextInput
-                name="street"
+                name="address.street"
                 type="text"
-                value={formik.values.street}
+                value={formik.values.address.street}
                 label="Street"
                 onChange={formik.handleChange}
               />
               <TextInput
-                name="zipcode"
+                name="address.zipcode"
                 type="text"
-                value={formik.values.zipcode}
+                value={formik.values.address.zipcode}
                 label="Zipcode"
                 onChange={formik.handleChange}
               />
               <TextInput
-                name="suite"
+                name="address.suite"
                 type="text"
-                value={formik.values.suite}
+                value={formik.values.address.suite}
                 label="Suite"
                 onChange={formik.handleChange}
               />
-              <TextInput
-                name="bs"
-                type="text"
-                value={formik.values.bs}
-                label="Bs"
-                onChange={formik.handleChange}
-              />
-              <TextInput
-                name="companyName"
-                type="text"
-                value={formik.values.companyName}
-                label="CompanyName"
-                onChange={formik.handleChange}
-              />
-              {formik.isValid && <button type="submit">Submit</button>}
+              {formik.isValid && (
+                <div className="flex justify-center m-4">
+                  <button
+                    className="p-4 bg-green-400 text-white rounded"
+                    type="submit"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              )}
             </form>
           </div>
         </div>
