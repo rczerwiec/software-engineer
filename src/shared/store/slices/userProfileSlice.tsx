@@ -4,6 +4,7 @@ import { IUserProfileState } from '../../globalTypes';
 
 const initialState: IUserProfileState = {
     id: 0,
+    username: 'Tomnow1',
     name: 'Tomasz Nowak',
     email: 'tomasznowak@gmail.com',
 };

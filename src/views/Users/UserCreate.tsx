@@ -2,10 +2,16 @@ import { Modal, useModal } from "../../shared/components/Modal";
 import { useFormik } from "formik";
 import { IUser } from "../../shared/globalTypes";
 import TextInput from "../../shared/components/TextInput";
+import { formSchema } from "./userFormSchema";
 
 interface IProps {
   onCreate: () => void;
 }
+//TODO:
+// 1. Implement validation (errors etc).
+// 2. Export form to another component
+//https://formik.org/docs/guides/validation
+
 
 function UserCreate({ onCreate }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
@@ -23,6 +29,7 @@ function UserCreate({ onCreate }: IProps) {
       bs: "",
       companyName: "",
     },
+    //validationSchema: formSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
       onCreate();
@@ -122,7 +129,7 @@ function UserCreate({ onCreate }: IProps) {
                   label="CompanyName"
                   onChange={formik.handleChange}
                 />
-                <button type="submit">Submit</button>
+                {formik.isValid && <button type="submit">Submit</button>}
               </form>
             </div>
           </div>

@@ -39,6 +39,7 @@ export interface IPhoto{
 
 export interface IUserProfileState{
     id: number;
+    username: string;
     name: string;
     email: string;
 }

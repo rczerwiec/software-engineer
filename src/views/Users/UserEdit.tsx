@@ -2,15 +2,19 @@ import { Modal, useModal } from "../../shared/components/Modal";
 import { useFormik } from "formik";
 import { IUser } from "../../shared/globalTypes";
 import TextInput from "../../shared/components/TextInput";
+import { formSchema } from "./userFormSchema";
 
 interface IProps {
   onEdit: (user: IUser) => void;
   user: IUser;
 }
+//TODO:
+// 1. Implement validation (errors etc).
+// 2. Export form to another component
+//https://formik.org/docs/guides/validation
 
 function UserEdit({ onEdit, user }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
-  console.log(user.address);
   const formik = useFormik({
     initialValues: {
       username: user.username,
@@ -25,14 +29,14 @@ function UserEdit({ onEdit, user }: IProps) {
       bs: user.company.bs,
       companyName: user.company.name,
     },
+    //validationSchema: formSchema,
     onSubmit: (values) => {
       onEdit(user);
       alert(JSON.stringify(values, null, 2));
       closeModal();
     },
   });
-
-  //Formularz do osobnego kompentu później
+  console.log(formik);
   return (
     <div>
       <div
@@ -62,7 +66,7 @@ function UserEdit({ onEdit, user }: IProps) {
               />
               <TextInput
                 name="email"
-                type="text"
+                type="email"
                 value={formik.values.email}
                 label="Email"
                 onChange={formik.handleChange}
@@ -123,7 +127,7 @@ function UserEdit({ onEdit, user }: IProps) {
                 label="CompanyName"
                 onChange={formik.handleChange}
               />
-              <button type="submit">Submit</button>
+              {formik.isValid && <button type="submit">Submit</button>}
             </form>
           </div>
         </div>
