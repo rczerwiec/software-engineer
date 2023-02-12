@@ -2,8 +2,8 @@ import Layout from "../../shared/components/Layout";
 import { useFetchUsersQuery } from "../../shared/store";
 
 function Users(){
-    const data = useFetchUsersQuery('');
-    console.log(data);
+    const response = useFetchUsersQuery('');
+    console.log(response);
     return(
         <Layout>
             Users

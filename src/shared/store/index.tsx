@@ -15,4 +15,4 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export {useFetchUsersQuery} from "./api/main";
+export {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery} from "./api/main";

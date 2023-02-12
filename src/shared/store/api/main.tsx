@@ -12,7 +12,7 @@ const mainApi = createApi({
     ],
     endpoints(builder) {
       return {
-        fetchUsers: builder.query<any, any>({
+        fetchUsers: builder.query({
           providesTags: ["Users"],
           query: () => {
             return {
@@ -21,9 +21,27 @@ const mainApi = createApi({
             };
           },
         }),
+        fetchPosts: builder.query({
+          providesTags: ["Posts"],
+          query: () => {
+            return {
+              url: "/posts",
+              method: "GET",
+            };
+          },
+        }),
+        fetchPhotos: builder.query<any, any>({
+          providesTags: ["Photos"],
+          query: () => {
+            return {
+              url: "/photos",
+              method: "GET",
+            };
+          },
+        }),
       };
     },
   });
 
-  export const {useFetchUsersQuery} = mainApi;
+  export const {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery} = mainApi;
   export {mainApi};
