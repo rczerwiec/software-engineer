@@ -3,10 +3,10 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { IUser, IUserProfileState } from '../../globalTypes';
 
 const initialState: IUserProfileState = {
-    id: 0,
-    username: 'Tomnow1',
-    name: 'Tomasz Nowak',
-    email: 'tomasznowak@gmail.com',
+    id: 1,
+    username: 'Bret',
+    name: 'Leanne Graham',
+    email: 'Sincere@april.biz',
 };
 
 export const userProfileSlice = createSlice({

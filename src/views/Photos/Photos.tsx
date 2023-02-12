@@ -1,10 +1,13 @@
 import Layout from "../../shared/components/Layout";
-import { useFetchPhotosQuery } from "../../shared/store";
+import { RootState, useFetchPhotosQuery } from "../../shared/store";
 import { IPhoto } from "../../shared/globalTypes";
+import { useSelector } from "react-redux";
 
 
 function Photos(){
-    const response = useFetchPhotosQuery('');
+    const userProfile = useSelector((state: RootState) => state.userProfile);
+    const response = useFetchPhotosQuery(userProfile.id);
+
     let renderedPhotos;
 
     if(response.isLoading){

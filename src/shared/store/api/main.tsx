@@ -23,18 +23,18 @@ const mainApi = createApi({
         }),
         fetchPosts: builder.query({
           providesTags: ["Posts"],
-          query: () => {
+          query: (id) => {
             return {
-              url: "/posts",
+              url: `/users/${id}/posts`,
               method: "GET",
             };
           },
         }),
         fetchPhotos: builder.query<any, any>({
           providesTags: ["Photos"],
-          query: () => {
+          query: (id) => {
             return {
-              url: "/photos",
+              url: `/users/${id}/photos`,
               method: "GET",
             };
           },

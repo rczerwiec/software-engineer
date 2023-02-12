@@ -1,12 +1,14 @@
 import Layout from "../../shared/components/Layout";
-import { useFetchPostsQuery } from "../../shared/store";
+import { RootState, useFetchPostsQuery } from "../../shared/store";
 import { IPost } from "../../shared/globalTypes";
+import { useSelector } from "react-redux";
 
 
 function Posts(){
-    const response = useFetchPostsQuery('');
-    let renderedPosts;
+    const userProfile = useSelector((state: RootState) => state.userProfile);
+    const response = useFetchPostsQuery(userProfile.id);
 
+    let renderedPosts;
     if(response.isLoading){
         renderedPosts = <h1>Loading...</h1>
     }
