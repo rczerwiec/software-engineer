@@ -1,5 +1,5 @@
-import { Modal, useModal } from "../../shared/components/Modal";
 import { IUser } from "../../shared/globalTypes";
+import {FaUserCircle} from "react-icons/fa"
 import UserDelete from "./UserDelete";
 import UserEdit from "./UserEdit";
 
@@ -11,14 +11,19 @@ interface IProps {
 }
 
 function UserCard({ user, onDelete, onUserEdit }: IProps) {
-
-
   return (
-    <div>
-      <h3>{user.name}</h3>
-      <p>{user.email}</p>
-      <UserDelete onDelete={onDelete} user={user}/>
-      <UserEdit onEdit={onUserEdit} user={user}/>
+    <div className="flex justify-between border-b p-4 items-center">
+      <div className="flex gap-2">
+        <FaUserCircle className="w-12 h-12 rounded-full"></FaUserCircle>
+        <div>
+          <h3 className="font-semibold">{user.name}</h3>
+          <p className="text-sm">{user.email}</p>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <UserDelete onDelete={onDelete} user={user} />
+        <UserEdit onEdit={onUserEdit} user={user} />
+      </div>
     </div>
   );
 }

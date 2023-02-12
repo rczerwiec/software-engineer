@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { IUser } from "../../shared/globalTypes";
 import TextInput from "../../shared/components/TextInput";
 import { formSchema } from "./userFormSchema";
+import {MdEdit} from "react-icons/md"
 
 interface IProps {
   onEdit: (user: IUser) => void;
@@ -44,7 +45,7 @@ function UserEdit({ onEdit, user }: IProps) {
           toggleModal();
         }}
       >
-        Edit
+        <MdEdit  className="w-6 h-6 text-gray-400"/>
       </div>
       <Modal isVisible={isVisible} onClose={closeModal}>
         <div className="absolute bg-whiteMain mt-20 h-full w-1/2 left-1/4 top-0 bg-white rounded ">

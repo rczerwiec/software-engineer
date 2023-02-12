@@ -1,5 +1,7 @@
 import { Modal, useModal } from "../../shared/components/Modal";
 import { IUser } from "../../shared/globalTypes";
+import {IoMdTrash} from "react-icons/io"
+
 
 interface IProps {
   onDelete: (user: IUser) => void;
@@ -16,7 +18,7 @@ function UserDelete({ onDelete, user }: IProps) {
           toggleModal();
         }}
       >
-        Delete
+        <IoMdTrash className="w-6 h-6 text-gray-400"/>
       </div>
       <Modal isVisible={isVisible} onClose={closeModal}>
         <div className="absolute bg-whiteMain mt-20 h-full w-1/2 left-1/4 top-0 bg-white rounded ">

@@ -10,9 +10,10 @@ interface IProps {
 
 function TextInput({ name, type, value, onChange, label }: IProps) {
   return (
-    <div>
+    <div className="flex flex-col">
       <label htmlFor={name}>{label}</label>
       <input
+        className="bg-primary-gray p-3 rounded-sm"
         id={name}
         name={name}
         type={type}

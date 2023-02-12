@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { IUser } from "../../shared/globalTypes";
 import TextInput from "../../shared/components/TextInput";
 import { formSchema } from "./userFormSchema";
+import { IoMdAddCircle } from "react-icons/io";
 
 interface IProps {
   onCreate: () => void;
@@ -11,7 +12,6 @@ interface IProps {
 // 1. Implement validation (errors etc).
 // 2. Export form to another component
 //https://formik.org/docs/guides/validation
-
 
 function UserCreate({ onCreate }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
@@ -44,8 +44,9 @@ function UserCreate({ onCreate }: IProps) {
         onClick={() => {
           toggleModal();
         }}
+        className="flex items-center justify-center m-4 gap-1.5"
       >
-        Create
+        <IoMdAddCircle className="w-6 h-6"></IoMdAddCircle> Create new User
       </div>
       <Modal isVisible={isVisible} onClose={closeModal}>
         <form onSubmit={formik.handleSubmit}>

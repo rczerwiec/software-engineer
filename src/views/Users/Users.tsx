@@ -4,8 +4,10 @@ import { IUser } from "../../shared/globalTypes";
 import UserCard from "./UserCard";
 import { useState } from "react";
 import UserCreate from "./UserCreate";
+import SearchBar from "../../shared/components/SearchBar";
 
 function Users() {
+  const [searchBarValue, setSearchBarValue] = useState("");
   const response = useFetchUsersQuery("");
   const [selectedUser, setSelectedUser] = useState<IUser>();
 
@@ -17,12 +19,11 @@ function Users() {
   const onUserEdit = (user: IUser) => {
     setSelectedUser(user);
     console.log(user.name, "onUserEdit");
-
   };
 
   const onUserCreate = () => {
-    console.log("Create a user...")
-  }
+    console.log("Create a user...");
+  };
 
   let renderedUsers;
 
@@ -45,8 +46,17 @@ function Users() {
   return (
     <>
       <Layout>
-        <UserCreate onCreate={onUserCreate}/>
-        {renderedUsers}
+        <SearchBar
+          searchBarValue={searchBarValue}
+          onChange={() => {
+            console.log("search");
+          }}
+        />
+
+        <UserCreate onCreate={onUserCreate} />
+        <div className="h-3/4 overflow-scroll border border-primary-gray rounded-lg">
+          {renderedUsers}
+        </div>
       </Layout>
     </>
   );

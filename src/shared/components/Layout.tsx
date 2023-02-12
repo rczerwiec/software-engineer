@@ -15,10 +15,8 @@ function Layout({ children }: IProps) {
     setIsOpen(!isOpen);
   };
 
-  const fixedContainer = classnames("flex bg-primary-gray");
-
   return (
-    <div>
+    <div className="bg-primary-gray">
       {isOpen && (
         <Navbar
           isOpen={isOpen}
@@ -29,11 +27,12 @@ function Layout({ children }: IProps) {
         toggleNavbar={toggleNavbar}
       />
 
-      <div className="bg-primary-white mt-4">
+      <div className="bg-primary-white mt-4 p-4 rounded-xl h-[calc(100vh-5rem)]">
         {children}
-        </div>
-
+      </div>
       <Footer />
+
+      
     </div>
   );
 }
