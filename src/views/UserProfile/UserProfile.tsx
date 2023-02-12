@@ -1,6 +1,11 @@
+import Layout from "../../shared/components/Layout";
+
 function UserProfile(){
     return(
-        <div>UserProfile</div>
+        <Layout>
+         <div>UserProfile</div>
+        </Layout>
+
     )
 }
 
