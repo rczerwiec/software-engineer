@@ -1,12 +1,7 @@
 import Layout from "../../shared/components/Layout";
 import { useFetchPostsQuery } from "../../shared/store";
+import { IPost } from "../../shared/globalTypes";
 
-interface IPost{
-    body: string;
-    id: number;
-    title: string;
-    userId: number;
-}
 
 function Posts(){
     const response = useFetchPostsQuery('');

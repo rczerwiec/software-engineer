@@ -10,6 +10,7 @@ function UserProfile(){
     return(
         <Layout>
          <div>UserProfile</div>
+         <div>{userProfile.name}</div>
         </Layout>
 
     )

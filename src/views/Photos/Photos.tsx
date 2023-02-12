@@ -1,13 +1,6 @@
 import Layout from "../../shared/components/Layout";
 import { useFetchPhotosQuery } from "../../shared/store";
-
-interface IPhoto{
-    albumId: number;
-    id: number;
-    thumbnailUrl: string;
-    title: string;
-    url: string;
-}
+import { IPhoto } from "../../shared/globalTypes";
 
 
 function Photos(){

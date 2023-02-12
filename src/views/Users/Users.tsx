@@ -1,33 +1,29 @@
 import Layout from "../../shared/components/Layout";
 import Modal from "../../shared/components/Modal";
 import { useFetchUsersQuery } from "../../shared/store";
+import { IUser } from "../../shared/globalTypes";
+import UserCard from "./UserCard";
+import { useState } from "react";
 
-interface IUser{
-    addres: {
-        city: string,
-        geo: {
-            lat: string,
-            lng: string,
-        }
-        street: string,
-        suite: string,
-        zipcode: string,
-    }
-    company: {
-        bs: string,
-        catchPhrase: string,
-        name: string,
-    }
-    email: string,
-    id: number,
-    name: string,
-    phone: string,
-    username: string,
-    website: string,
-}
 
 function Users(){
     const response = useFetchUsersQuery('');
+    const [selectedUser, setSelectedUser] = useState<IUser>();
+    const [showModal, setShowModal] = useState(false);
+
+    const onUserDelete = (user: IUser) => {
+        setSelectedUser(user);
+        console.log(user.name,'onUserDelete');
+                //show modal here
+    }
+
+    const onUserEdit = (user: IUser) => {
+        setSelectedUser(user);
+        console.log(user.name,'onUserEdit');
+        //show modal here
+    }
+
+
     let renderedUsers;
 
     if(response.isLoading){
@@ -39,9 +35,8 @@ function Users(){
     else if(response.isSuccess){
         renderedUsers = response.data.map((user: IUser) => {
             return (
-                <div key={user.id}>
-                    <h1>{user.name}</h1>
-                </div>
+                <UserCard user={user} key={user.id} onDelete={onUserDelete} onEdit={onUserEdit}>
+                </UserCard>
             )
         })
     }

@@ -25,5 +25,3 @@ function Modal({ onClose, children }: IProps) {
 }
 
 export default Modal;
-
-//className="fixed flex justify-center top-0 left-0 w-full h-full bg-transparentGrayMain"

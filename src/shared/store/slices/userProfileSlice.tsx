@@ -1,13 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { IUserProfileState } from '../../globalTypes';
 
-export interface UserProfileState{
-    id: number;
-    name: string;
-    email: string;
-}
-
-const initialState: UserProfileState = {
+const initialState: IUserProfileState = {
     id: 0,
     name: 'Tomasz Nowak',
     email: 'tomasznowak@gmail.com',
