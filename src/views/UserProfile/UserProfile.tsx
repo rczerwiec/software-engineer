@@ -61,7 +61,8 @@ function UserProfile() {
   console.log(userProfile);
   return (
     <Layout>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} >
+        <div className="flex flex-col gap-4 justify-center">
         <TextInput
           name="username"
           type="text"
@@ -83,9 +84,14 @@ function UserProfile() {
           label="Email"
           onChange={formik.handleChange}
         />
-        <button type="submit">Submit</button>
+        </div>
+        <div className="flex justify-end m-4">
+           <button className="p-4 bg-green-400 text-white rounded" type="submit">Confirm</button>
+        </div>
+        
       </form>
       <div>
+         <label>Log in to another user</label>
          <Selector placeholder={placeholderText} onChange={(option : IOption) => {console.log(option.value)
             dispatch(change(option.value))}} options={options}/>
       </div>

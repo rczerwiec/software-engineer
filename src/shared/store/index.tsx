@@ -21,4 +21,4 @@ setupListeners(store.dispatch);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery, useDeleteUserMutation} from "./api/main";
+export {useFetchUsersQuery, useFetchAlbumsQuery, useFetchPostsQuery,useFetchAlbumPhotosQuery, useDeleteUserMutation} from "./api/main";

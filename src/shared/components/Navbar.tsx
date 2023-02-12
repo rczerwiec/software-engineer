@@ -14,11 +14,11 @@ const navigation = [
     to: "/users",
   },
   {
-    name: "Photos",
+    name: "My Photos",
     to: "/photos",
   },
   {
-    name: "Posts",
+    name: "My Posts",
     to: "/posts",
   },
 ];

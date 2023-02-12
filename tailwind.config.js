@@ -10,6 +10,7 @@ module.exports = {
         'primary-white': '#FFFFFF',
         'primary-black': '#000000',
         'primary-gray': '#F6F6F6',
+        'transparent-gray': "rgba(0,0,0, .8)",
       }
     },
   },

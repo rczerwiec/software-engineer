@@ -1,27 +1,29 @@
 import Layout from "../../shared/components/Layout";
-import { RootState, useFetchPhotosQuery } from "../../shared/store";
-import { IPhoto } from "../../shared/globalTypes";
+import { RootState, useFetchAlbumsQuery } from "../../shared/store";
+import { IAlbum, IPhoto } from "../../shared/globalTypes";
 import { useSelector } from "react-redux";
+import  GridLoader  from "react-spinners/GridLoader";
+import AlbumPhotos from "./AlbumPhotos";
+
 
 
 function Photos(){
     const userProfile = useSelector((state: RootState) => state.userProfile);
-    const response = useFetchPhotosQuery(userProfile.id);
+    const response = useFetchAlbumsQuery(userProfile.id);
 
-    let renderedPhotos;
+    let renderedAlbums;
 
     if(response.isLoading){
-        renderedPhotos = <h1>Loading...</h1>
+        renderedAlbums = <div className="flex justify-center items-center"><GridLoader/>
+            </div>
     }
     else if(response.isError){
-        renderedPhotos = <h1>Error :</h1>
+        renderedAlbums = <h1>Error</h1>
     }
     else if(response.isSuccess){
-        renderedPhotos = response.data.map((photo: IPhoto) => {
+        renderedAlbums = response.data.map((album: IAlbum) => {
             return (
-                <div key={photo.id}>
-                    <img src={photo.url} alt={photo.title} />
-                </div>
+                    <AlbumPhotos id={album.id} title={album.title} />
             )
         })
     }
@@ -30,7 +32,10 @@ function Photos(){
 
     return(
         <Layout>
-            {renderedPhotos}
+        <h3 className="text-xl font-bold my-2">{userProfile.name} Albums</h3>
+        <div className="h-3/4 overflow-scroll border border-primary-gray rounded-lg">
+                    {renderedAlbums}
+        </div>
         </Layout>
     )
 }

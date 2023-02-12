@@ -39,11 +39,20 @@ const mainApi = createApi({
             };
           },
         }),
-        fetchPhotos: builder.query<any, any>({
+        fetchAlbums: builder.query<any, any>({
           providesTags: ["Photos"],
           query: (id) => {
             return {
-              url: `/users/${id}/photos`,
+              url: `/users/${id}/albums`,
+              method: "GET",
+            };
+          },
+        }),
+        fetchAlbumPhotos: builder.query<any, any>({
+          providesTags: ["Photos"],
+          query: (id) => {
+            return {
+              url: `/albums/${id}/photos`,
               method: "GET",
             };
           },
@@ -52,5 +61,5 @@ const mainApi = createApi({
     },
   });
 
-  export const {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery ,useDeleteUserMutation} = mainApi;
+  export const {useFetchUsersQuery, useFetchAlbumsQuery, useFetchPostsQuery,useFetchAlbumPhotosQuery ,useDeleteUserMutation} = mainApi;
   export {mainApi};

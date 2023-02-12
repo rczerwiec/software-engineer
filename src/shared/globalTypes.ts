@@ -1,3 +1,5 @@
+import { NumberLiteralType } from "typescript";
+
 export interface IUser{
     address: {
         city: string,
@@ -27,6 +29,12 @@ export interface IPost{
     id: number;
     title: string;
     userId: number;
+}
+
+export interface IAlbum{
+    userId?: number;
+    id: number;
+    title: string;
 }
 
 export interface IPhoto{
