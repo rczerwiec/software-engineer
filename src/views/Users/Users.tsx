@@ -1,4 +1,5 @@
 import Layout from "../../shared/components/Layout";
+import Modal from "../../shared/components/Modal";
 import { useFetchUsersQuery } from "../../shared/store";
 
 interface IUser{
