@@ -1,5 +1,5 @@
 export interface IUser{
-    addres: {
+    address: {
         city: string,
         geo: {
             lat: string,

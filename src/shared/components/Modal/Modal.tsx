@@ -2,11 +2,12 @@ import { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 interface IProps {
+  isVisible: boolean;
   onClose?: () => void;
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
-function Modal({ onClose, children }: IProps) {
+function Modal({ isVisible, onClose, children }: IProps) {
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
 
@@ -14,6 +15,10 @@ function Modal({ onClose, children }: IProps) {
       document.body.classList.remove("overflow-hidden");
     };
   }, []);
+
+  if(!isVisible) {
+    return null;
+  }
 
   return ReactDOM.createPortal(
     <>
