@@ -1,15 +1,29 @@
 import { Modal, useModal } from "../../shared/components/Modal";
 import { IUser } from "../../shared/globalTypes";
 import {IoMdTrash} from "react-icons/io"
+import { useDeleteUserMutation } from "../../shared/store";
+import displayToast from "../../shared/utils/displayToast";
 
 
 interface IProps {
-  onDelete: (user: IUser) => void;
   user: IUser;
 }
 
-function UserDelete({ onDelete, user }: IProps) {
+function UserDelete({ user }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
+  const [deleteUser, result] = useDeleteUserMutation();
+
+  const onUserDelete = async (user: IUser) => {
+    
+    return await deleteUser(user.id).unwrap().then((res) => {
+        displayToast({type: "success", message: "Successfully deleted user"});
+    }).catch((err) => {
+        displayToast({type: "error", message: "Unexpected error"});
+    });
+
+    
+    
+  };
 
   return (
     <div>
@@ -27,7 +41,7 @@ function UserDelete({ onDelete, user }: IProps) {
             <button
               type="button"
               onClick={() => {
-                onDelete(user);
+                onUserDelete(user)
                 closeModal();
               }}
             >

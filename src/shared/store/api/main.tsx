@@ -21,6 +21,15 @@ const mainApi = createApi({
             };
           },
         }),
+        deleteUser: builder.mutation({
+          invalidatesTags: ["Users"],
+          query: (user) => {
+            return {
+              url: `/users/${user.id}`,
+              method: "DELETE",
+            };
+          },
+        }),
         fetchPosts: builder.query({
           providesTags: ["Posts"],
           query: (id) => {
@@ -43,5 +52,5 @@ const mainApi = createApi({
     },
   });
 
-  export const {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery} = mainApi;
+  export const {useFetchUsersQuery, useFetchPhotosQuery, useFetchPostsQuery ,useDeleteUserMutation} = mainApi;
   export {mainApi};

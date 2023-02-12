@@ -37,7 +37,7 @@ function UserEdit({ onEdit, user }: IProps) {
       closeModal();
     },
   });
-  console.log(formik);
+  //console.log(formik);
   return (
     <div>
       <div

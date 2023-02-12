@@ -2,7 +2,8 @@ import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Navbar from "./Navbar";
-import classnames from "classnames";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface IProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ function Layout({ children }: IProps) {
 
   return (
     <div className="bg-primary-gray">
+        <ToastContainer />
       {isOpen && (
         <Navbar
           isOpen={isOpen}
