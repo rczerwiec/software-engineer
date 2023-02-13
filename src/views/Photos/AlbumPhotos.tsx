@@ -1,8 +1,10 @@
-import GridLoader from "react-spinners/GridLoader";
+import Spinner from "../../shared/components/Spinner";
 import { Modal, useModal } from "../../shared/components/Modal";
-import { IAlbum, IPhoto } from "../../shared/globalTypes";
 import { useFetchAlbumPhotosQuery } from "../../shared/store";
+import { IAlbum, IPhoto } from "../../shared/globalTypes";
 import { IoIosAlbums } from "react-icons/io";
+import { GrClose } from "react-icons/gr";
+import { motion } from "framer-motion";
 
 function AlbumPhotos({ id, title }: IAlbum) {
   const { isVisible, closeModal, toggleModal } = useModal();
@@ -11,9 +13,7 @@ function AlbumPhotos({ id, title }: IAlbum) {
   let renderedPhotos;
   if (response.isLoading) {
     renderedPhotos = (
-      <div className="flex justify-center items-center">
-        <GridLoader />
-      </div>
+      <Spinner/>
     );
   } else if (response.isError) {
     renderedPhotos = <div>Error</div>;
@@ -28,7 +28,9 @@ function AlbumPhotos({ id, title }: IAlbum) {
   }
 
   return (
-    <div
+    <motion.div  initial={{ opacity: 0 }}
+    whileInView={{ opacity: 1}}
+    transition={{duration:0.8}}
     onClick={() => {
         toggleModal();
       }}
@@ -50,8 +52,9 @@ function AlbumPhotos({ id, title }: IAlbum) {
       
 
       <Modal isVisible={isVisible} onClose={closeModal}>
-        <div className="absolute bg-whiteMain mt-20 h-3/4 w-full top-0 bg-white rounded ">
+        <div className="absolute bg-whiteMain mt-20 h-3/4 w-full top-0 bg-white rounded xl:w-1/3 xl:left-0 xl:right-0 xl:mr-auto xl:ml-auto">
           <div className="absolute flex flex-col justify-between p-8 shrink h-full w-full overflow-y-auto  scrollbar-hide">
+            <div className="flex justify-end" onClick={closeModal}><GrClose className="w-5 h-5"/></div>
             <h3 className="text-center text-md font-bold my-2">
               Album:{title}
             </h3>
@@ -62,7 +65,7 @@ function AlbumPhotos({ id, title }: IAlbum) {
           </div>
         </div>
       </Modal>
-    </div>
+    </motion.div>
   );
 }
 

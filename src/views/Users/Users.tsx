@@ -1,10 +1,11 @@
 import Layout from "../../shared/components/Layout";
-import {useFetchUsersQuery } from "../../shared/store";
-import { IUser } from "../../shared/globalTypes";
-import UserCard from "./UserCard";
-import { useState } from "react";
 import UserCreate from "./UserCreate";
 import SearchBar from "../../shared/components/SearchBar";
+import Spinner from "../../shared/components/Spinner";
+import UserCard from "./UserCard";
+import { useState } from "react";
+import { IUser } from "../../shared/globalTypes";
+import { useFetchUsersQuery } from "../../shared/store";
 
 
 function Users() {
@@ -14,7 +15,7 @@ function Users() {
   let renderedUsers;
 
   if (response.isLoading) {
-    renderedUsers = <h1>Loading...</h1>;
+    renderedUsers = <Spinner />;
   } else if (response.isError) {
     renderedUsers = <h1>Error :</h1>;
   } else if (response.isSuccess) {
@@ -27,19 +28,13 @@ function Users() {
         return o;
     });
     renderedUsers = renderedValue.map((user: IUser) => {
-      return (
-        <UserCard
-          user={user}
-          key={user.id}
-        />
-      );
+      return <UserCard user={user} key={user.id} />;
     });
   }
 
   const onSearchBarValueChangedHandler = (value: string) => {
     setSearchBarValue(value);
   };
-
 
   return (
     <>
@@ -49,7 +44,7 @@ function Users() {
           onChange={onSearchBarValueChangedHandler}
         />
 
-        <UserCreate/>
+        <UserCreate />
         <div className="h-3/4 overflow-scroll overflow-x-hidden border border-primary-gray rounded-lg">
           {renderedUsers}
         </div>

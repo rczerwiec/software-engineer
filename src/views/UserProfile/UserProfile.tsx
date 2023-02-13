@@ -9,6 +9,7 @@ import Selector from "../../shared/components/Selector";
 import { edit, change } from "../../shared/store/slices/userProfileSlice";
 import {useEffect} from "react";
 import displayToast from "../../shared/utils/displayToast";
+import Button from "../../shared/components/Buttons/Button";
 
 interface IOption{
     label: string;
@@ -88,7 +89,9 @@ function UserProfile() {
         />
         </div>
         <div className="flex justify-end m-4">
-           <button className="p-4 bg-green-400 text-white rounded" type="submit">Confirm</button>
+                  <Button green type="submit" textColor="text-white" noStyle={false} rounded>
+                    Confirm
+                  </Button>
         </div>
         
       </form>

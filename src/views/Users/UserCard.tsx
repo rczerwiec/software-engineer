@@ -1,7 +1,8 @@
-import { IUser } from "../../shared/globalTypes";
-import {FaUserCircle} from "react-icons/fa"
 import UserDelete from "./UserDelete";
 import UserEdit from "./UserEdit";
+import { IUser } from "../../shared/globalTypes";
+import { FaUserCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 interface IProps {
   user: IUser;
@@ -10,7 +11,12 @@ interface IProps {
 
 function UserCard({ user }: IProps) {
   return (
-    <div className="flex justify-between border-b p-4 items-center">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="flex justify-between border-b p-4 items-center"
+    >
       <div className="flex gap-2">
         <FaUserCircle className="w-12 h-12 rounded-full"></FaUserCircle>
         <div>
@@ -22,7 +28,7 @@ function UserCard({ user }: IProps) {
         <UserDelete user={user} />
         <UserEdit user={user} />
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,12 +1,15 @@
-import TextInput from "../../shared/components/TextInput";
+import TextInput from "../../../shared/components/TextInput";
+import Error from "../../../shared/components/Formik/Error";
+import Button from "../../../shared/components/Buttons/Button";
 
 
 function UserForm({formik}:any){
+    
     return(
         <form
               onSubmit={formik.handleSubmit}
-              className="flex flex-col gap-2"
-            >
+              className="flex flex-col gap-2 overflow-y-auto"
+            > 
               <TextInput
                 name="username"
                 type="text"
@@ -14,6 +17,7 @@ function UserForm({formik}:any){
                 label="Username"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.username}/>
               <TextInput
                 name="name"
                 type="text"
@@ -21,6 +25,7 @@ function UserForm({formik}:any){
                 label="Name"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.name}/>
               <TextInput
                 name="email"
                 type="email"
@@ -28,6 +33,7 @@ function UserForm({formik}:any){
                 label="Email"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.email}/>
               <TextInput
                 name="phone"
                 type="text"
@@ -35,6 +41,7 @@ function UserForm({formik}:any){
                 label="Phone"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.phone}/>
               <TextInput
                 name="website"
                 type="text"
@@ -42,6 +49,7 @@ function UserForm({formik}:any){
                 label="Website"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.website}/>
               <TextInput
                 name="address.city"
                 type="text"
@@ -49,6 +57,7 @@ function UserForm({formik}:any){
                 label="City"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.city}/>
               <TextInput
                 name="address.street"
                 type="text"
@@ -56,6 +65,7 @@ function UserForm({formik}:any){
                 label="Street"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.street}/>
               <TextInput
                 name="address.zipcode"
                 type="text"
@@ -63,6 +73,7 @@ function UserForm({formik}:any){
                 label="Zipcode"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.zipcode}/>
               <TextInput
                 name="address.suite"
                 type="text"
@@ -70,14 +81,12 @@ function UserForm({formik}:any){
                 label="Suite"
                 onChange={formik.handleChange}
               />
+              <Error text={formik.errors.suite}/>
               {formik.isValid && (
                 <div className="flex justify-center m-4">
-                  <button
-                    className="p-4 bg-green-400 text-white rounded"
-                    type="submit"
-                  >
+                  <Button green type="submit" textColor="text-white" noStyle={false} rounded>
                     Confirm
-                  </button>
+                  </Button>
                 </div>
               )}
             </form>

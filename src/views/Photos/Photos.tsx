@@ -2,8 +2,8 @@ import Layout from "../../shared/components/Layout";
 import { RootState, useFetchAlbumsQuery } from "../../shared/store";
 import { IAlbum, IPhoto } from "../../shared/globalTypes";
 import { useSelector } from "react-redux";
-import  GridLoader  from "react-spinners/GridLoader";
 import AlbumPhotos from "./AlbumPhotos";
+import Spinner from "../../shared/components/Spinner";
 
 
 
@@ -14,8 +14,7 @@ function Photos(){
     let renderedAlbums;
 
     if(response.isLoading){
-        renderedAlbums = <div className="flex justify-center items-center"><GridLoader/>
-            </div>
+        renderedAlbums = <Spinner/>
     }
     else if(response.isError){
         renderedAlbums = <h1>Error</h1>
