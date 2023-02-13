@@ -6,6 +6,8 @@ docker build -t app .
 docker compose up -d
 ```
 
+Preview: http://5.189.184.91:3000/
+
 ## Available Scripts
 
 In the project directory, you can run:
