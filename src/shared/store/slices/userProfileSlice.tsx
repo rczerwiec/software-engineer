@@ -2,11 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { IUser, IUserProfileState } from '../../globalTypes';
 
-
-//TODO:
-// 1. Replace slice with rtk query.
-//https://formik.org/docs/guides/validation
-
 const initialState: IUserProfileState = {
     id: 1,
     username: 'Bret',

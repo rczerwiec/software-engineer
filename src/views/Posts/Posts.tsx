@@ -2,6 +2,8 @@ import Layout from "../../shared/components/Layout";
 import { RootState, useFetchPostsQuery } from "../../shared/store";
 import { IPost } from "../../shared/globalTypes";
 import { useSelector } from "react-redux";
+import Spinner from "../../shared/components/Spinner";
+import { motion } from "framer-motion";
 
 function Posts() {
   const userProfile = useSelector((state: RootState) => state.userProfile);
@@ -9,13 +11,16 @@ function Posts() {
 
   let renderedPosts;
   if (response.isLoading) {
-    renderedPosts = <h1>Loading...</h1>;
+    renderedPosts = <Spinner />;
   } else if (response.isError) {
     renderedPosts = <h1>Error :</h1>;
   } else if (response.isSuccess) {
     renderedPosts = response.data.map((post: IPost) => {
       return (
-        <div
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
           key={post.id}
           className="flex justify-between border-b p-4 items-center"
         >
@@ -23,7 +28,7 @@ function Posts() {
             <label className="font-bold">{post.title}</label>
             <p className="text-sm">{post.body}</p>
           </div>
-        </div>
+        </motion.div>
       );
     });
   }

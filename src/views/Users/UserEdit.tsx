@@ -1,18 +1,17 @@
-import { Modal, useModal } from "../../shared/components/Modal";
-import { useFormik } from "formik";
+import UserForm from "./Form/UserForm";
 import { IUser } from "../../shared/globalTypes";
-import { formSchema } from "./userFormSchema";
+import { formSchema } from "./Form/userFormSchema";
 import { MdEdit } from "react-icons/md";
 import displayToast from "../../shared/utils/displayToast";
+import { Modal, useModal } from "../../shared/components/Modal";
 import { useEditUserMutation } from "../../shared/store";
-import UserForm from "./UserForm";
+import { useFormik } from "formik";
+import { GrClose } from "react-icons/gr";
+import { motion } from "framer-motion";
 
 interface IProps {
   user: IUser;
 }
-//TODO:
-// 1. Implement validation (errors etc).
-//https://formik.org/docs/guides/validation
 
 function UserEdit({ user }: IProps) {
   const { isVisible, closeModal, toggleModal } = useModal();
@@ -42,10 +41,11 @@ function UserEdit({ user }: IProps) {
         name: user.company.name,
       },
     },
-    //validationSchema: formSchema,
-    onSubmit: (values) => {
+    validationSchema: formSchema,
+    onSubmit: (values, { resetForm }) => {
       onUserEdit(values);
       closeModal();
+      resetForm();
     },
   });
 
@@ -53,6 +53,7 @@ function UserEdit({ user }: IProps) {
     return await editUser(user)
       .unwrap()
       .then((res) => {
+        console.log("res from api:", res);
         displayToast({ type: "success", message: "Successfully edited user" });
       })
       .catch((err) => {
@@ -67,17 +68,25 @@ function UserEdit({ user }: IProps) {
           toggleModal();
         }}
       >
-        <MdEdit className="w-6 h-6 text-gray-400" />
+        <MdEdit className="w-6 h-6 text-gray-400 hover:cursor-pointer" />
       </div>
       <Modal isVisible={isVisible} onClose={closeModal}>
-        <div className="absolute bg-whiteMain mt-20 h-3/4 w-full top-0 bg-white rounded">
-          <div className="absolute flex flex-col shrink h-full w-full overflow-y-auto scrollbar-hide p-6">
+      <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.6,
+            delay: 0.1,
+            ease: [0, 0.71, 0.2, 1.01],
+          }} className="absolute bg-whiteMain mt-20 h-5/6 w-full top-0 bg-white rounded xl:w-1/3 xl:left-0 xl:right-0 xl:mr-auto xl:ml-auto">
+          <div className="absolute flex flex-col shrink h-full w-full overflow-y-auto scrollbar-hide p-6 ">
+          <div className="flex justify-end" onClick={closeModal}><GrClose className="w-5 h-5 hover:cursor-pointer"/></div>
             <h3 className="text-center text-md font-bold my-2">
               <span>Edit User</span>
             </h3>
-            <UserForm formik={formik}/>
+            <UserForm formik={formik} />
           </div>
-        </div>
+        </motion.div>
       </Modal>
     </div>
   );
