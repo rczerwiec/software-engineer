@@ -29,14 +29,14 @@ function AlbumPhotos({ id, title }: IAlbum) {
 
   return (
     <div
+    onClick={() => {
+        toggleModal();
+      }}
       className="flex justify-between border-b p-4 items-center cursor-pointer"
     >
         
       <div
         className="flex gap-4"
-        onClick={() => {
-          toggleModal();
-        }}
       >
               <div className="flex gap-2">
         <IoIosAlbums className="w-6 h-6" />

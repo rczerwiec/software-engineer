@@ -8,6 +8,7 @@ import { IUser } from "../../shared/globalTypes";
 import Selector from "../../shared/components/Selector";
 import { edit, change } from "../../shared/store/slices/userProfileSlice";
 import {useEffect} from "react";
+import displayToast from "../../shared/utils/displayToast";
 
 interface IOption{
     label: string;
@@ -40,13 +41,15 @@ function UserProfile() {
 
   const formik = useFormik({
     initialValues: {
+      id: userProfile.id,
       username: userProfile.username,
       name: userProfile.name,
       email: userProfile.email,
     },
     //validationSchema: profileFormSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(edit(values));
+      displayToast({ type: "success", message: "Successfully edited user" });//change
     },
   });
 
