@@ -1,5 +1,5 @@
 import Layout from "../../shared/components/Layout";
-import { useDeleteUserMutation, useFetchUsersQuery } from "../../shared/store";
+import {useFetchUsersQuery } from "../../shared/store";
 import { IUser } from "../../shared/globalTypes";
 import UserCard from "./UserCard";
 import { useState } from "react";
@@ -18,7 +18,15 @@ function Users() {
   } else if (response.isError) {
     renderedUsers = <h1>Error :</h1>;
   } else if (response.isSuccess) {
-    renderedUsers = response.data.map((user: IUser) => {
+    const renderedValue = response.data.filter((o: IUser) => {
+      if (
+        o.name.toLowerCase().includes(searchBarValue.toLowerCase()) ||
+        o.username.toLowerCase().includes(searchBarValue.toLowerCase()) ||
+        o.email.toLowerCase().includes(searchBarValue.toLowerCase())
+      )
+        return o;
+    });
+    renderedUsers = renderedValue.map((user: IUser) => {
       return (
         <UserCard
           user={user}
@@ -27,18 +35,22 @@ function Users() {
       );
     });
   }
+
+  const onSearchBarValueChangedHandler = (value: string) => {
+    setSearchBarValue(value);
+  };
+
+
   return (
     <>
       <Layout>
         <SearchBar
           searchBarValue={searchBarValue}
-          onChange={() => {
-            console.log("search");
-          }}
+          onChange={onSearchBarValueChangedHandler}
         />
 
         <UserCreate/>
-        <div className="h-3/4 overflow-scroll border border-primary-gray rounded-lg">
+        <div className="h-3/4 overflow-scroll overflow-x-hidden border border-primary-gray rounded-lg">
           {renderedUsers}
         </div>
       </Layout>

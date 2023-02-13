@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FcMenu } from "react-icons/fc";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import classNames from "classnames";
@@ -25,7 +25,7 @@ const navigation = [
 
 function Navbar({isOpen,toggleNavbar}:IProps) {
   
-  const container = classNames("fixed z-10 bg-primary-white w-14", {"rounded-r-md ":!isOpen, "w-full h-full": isOpen});
+  const container = classNames("fixed z-10 bg-primary-white w-14", {"rounded-r-md ":!isOpen, "lg:w-1/4 lg:border-r-2 w-full h-full": isOpen});
 
   const renderedLinks = navigation.map((_) => {
     return (

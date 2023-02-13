@@ -13,8 +13,10 @@ export const userProfileSlice = createSlice({
     name: 'userProfile',
     initialState,
     reducers: {
-      edit: (state) => {
-        console.log("Editing...",state);
+      edit: (state, action: PayloadAction<IUser>) => {
+        state.username = action.payload.username;
+        state.name = action.payload.name;
+        state.email = action.payload.email;
       },
       change: (state, action: PayloadAction<IUser>) => {
         state.id = action.payload.id;

@@ -15,7 +15,7 @@ function Header({toggleNavbar}: IProps) {
 
 
   return (
-    <div className="flex w-screen bg-primary-white justify-between">
+    <div className="flex w-full bg-primary-white justify-between">
       <div className="flex items-center justify-center w-14 h-14 border-white border-r-primary-gray border-2" onClick={toggleNavbar}>
         <FcMenu className="w-6 h-6"/>
       </div>

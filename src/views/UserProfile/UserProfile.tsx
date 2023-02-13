@@ -58,7 +58,6 @@ function UserProfile() {
     }
   },[userProfile]);
 
-  console.log(userProfile);
   return (
     <Layout>
       <form onSubmit={formik.handleSubmit} >
