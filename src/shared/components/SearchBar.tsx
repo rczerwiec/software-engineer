@@ -1,4 +1,3 @@
-import {BsSearch} from "react-icons/bs"
 
 interface IProps{
     onChange: (value: string) => void;
@@ -9,7 +8,6 @@ interface IProps{
     
     return (
       <div className="flex bg-primary-gray px-2 justify-center items-center my-auto w-full rounded">
-      <BsSearch/>
       <input
         className="bg-primary-gray w-full p-3 align-left  text-sm rounded-md"
         value={searchBarValue} placeholder="Search..." onChange={(e)=>{onChange(e.target.value)}}
