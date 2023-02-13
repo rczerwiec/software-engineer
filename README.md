@@ -1,6 +1,12 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Run with docker using this commands in project's main directory (port 3000)
+```
+docker build -t app .
+docker compose up -d
+```
+
+Preview: http://5.189.184.91:3000/
 
 ## Available Scripts
 

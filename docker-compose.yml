@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  app:
+    image: app
+    container_name: software-engineer
+    ports: 
+      - 3000:3000
