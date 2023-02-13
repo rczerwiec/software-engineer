@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+Use npm install before running other comands
+
 Run with docker using this commands in project's main directory (port 3000)
 ```
 docker build -t app .
